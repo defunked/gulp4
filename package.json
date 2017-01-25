@@ -1,0 +1,15 @@
+{
+  "name": "htmlbookru__lessons",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "a.grigoriev <a.greegoriev@gmail.com> (http://github.com/defunked)",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp-stylus": "^2.6.0",
+    "stylus": "^0.54.5"
+  }
+}
