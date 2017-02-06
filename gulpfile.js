@@ -8,19 +8,23 @@ const sourcemaps = require('gulp-sourcemaps');
 const gulpIf = require('gulp-if');
 const del = require('del');
 const newer = require('gulp-newer');
-
+const browserSync = require('browser-sync').create();
+const notify = require('gulp-notify');
+const combiner = require('stream-combiner2').obj;
 const isDevelopment = !process.env.NODE_ENV || process.env.NODE_ENV == 'development';
 
 gulp.task('styles', function() {
-  return gulp.src('frontend/styles/main.styl')
-    .pipe(gulpIf(isDevelopment, sourcemaps.init()))
+  return combiner(
+    gulp.src('frontend/styles/main.styl'),
+    gulpIf(isDevelopment, sourcemaps.init()),
     // .pipe(debug({title: 'src'}))
-    .pipe(stylus())
+    stylus(),
     // .pipe(debug({title: 'stylus'})))
     // .pipe(concat('all.css'))
     // .pipe(debug({title: 'concat'}))
-    .pipe(gulpIf(isDevelopment, sourcemaps.write()))
-    .pipe(gulp.dest('public'));
+    gulpIf(isDevelopment, sourcemaps.write()),
+    gulp.dest('public')
+  ).on('error', notify.onError());
 });
 
 gulp.task('clean', function() {
@@ -40,4 +44,13 @@ gulp.task('watch', function() {
 });
 
 gulp.task('build', gulp.series('clean',  gulp.parallel('styles', 'assets')));
-gulp.task('dev', gulp.series('build', 'watch'));
+
+gulp.task('serve', function() {
+  browserSync.init ({
+    server: 'public'
+  });
+  browserSync.watch('public/**/*.*').on('change', browserSync.reload);
+});
+
+gulp.task('dev', gulp.series('build', gulp.parallel('watch', 'serve'))
+);
