@@ -1,0 +1,17 @@
+doctype html
+html(lang='ru-RU')
+  head
+    link(href='main.css', rel='stylesheet')
+    meta(charset='UTF-8')
+    title Document
+  body
+
+    include ../../blocks/block/block.pug
+
+    h2 Хелой йопват!
+    p
+      div Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus dolore totam, quis vero officiis facilis, vitae dolorem nihil consectetur delectus asperiores inventore voluptatum earum non quidem eligendi, molestias? Eaque, reiciendis.
+      div Asperiores odio tenetur aspernatur ab sunt labore nemo atque maiores sint dolorum repudiandae, mollitia et quisquam, officia magni doloribus! Commodi, quidem recusandae. Id eius reprehenderit laudantium blanditiis quaerat, dicta eaque!
+      div Esse adipisci inventore, recusandae nostrum, ipsa soluta tempora sint sed vitae autem corporis expedita rem accusantium necessitatibus quam suscipit nam. Cumque ducimus qui ab accusantium eveniet, voluptates dolore nulla aliquam.
+      div Sapiente dicta adipisci distinctio, sint! Delectus quibusdam, quos debitis ipsa cum. Temporibus architecto excepturi perferendis magni quos. Perferendis harum optio possimus, ipsam quod itaque, soluta. Quis quas fugiat, suscipit accusamus?
+      div Labore dolore, quam autem impedit id rem quae earum tenetur ex iure adipisci eligendi nesciunt nisi, quasi animi provident, sint dolorum culpa corrupti maiores tempora distinctio delectus ab quia. Nihil.

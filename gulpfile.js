@@ -13,30 +13,41 @@ function lazyRequireTask(taskName, path, options) {
 }
 
 lazyRequireTask('styles', './tasks/styles', {
-  src: 'app/sass/main.scss'
+  src: './app/styles/main.scss'
+});
+
+lazyRequireTask('pages-pug', './tasks/pages-pug', {
+  src: './app/pages/pug/*.pug'
+});
+
+lazyRequireTask('pages-html', './tasks/pages-html', {
+  src: './app/pages/html/*.html',
+  dst: './dist/'
 });
 
 lazyRequireTask('clean', './tasks/clean', {
-  dst: 'public'
+  dst: 'dist'
 });
 
 lazyRequireTask('assets', './tasks/assets', {
-  src: 'app/img/**',
-  dst: 'dist/assets'
+  src: './app/imgs/**/*.*',
+  dst: './dist/assets/'
 });
 
 gulp.task('build', gulp.series(
     'clean',
-    gulp.parallel('styles', 'assets'))
-);
+    gulp.parallel('styles', 'pages-pug', 'pages-html', 'assets')
+));
 
 lazyRequireTask('serve', './tasks/serve', {
   src: 'dist'
 });
 
 gulp.task('watch', function() {
-  gulp.watch('app/sass/**/*.+(sass|scss)', gulp.series('styles'));
-  gulp.watch('app/img/**/*.*', gulp.series('assets'));
+  gulp.watch(['./app/styles/*.+(sass|scss)', './app/blocks/**/*.+(sass|scss)'], gulp.series('styles'));
+  gulp.watch(['./app/pages/pug/*.pug', './app/blocks/**/*.pug'], gulp.series('pages-pug'));
+  gulp.watch('./app/pages/html/*.html', gulp.series('pages-html'));
+  gulp.watch('./app/imgs/**/*.*', gulp.series('assets'));
 });
 
 gulp.task('dev',
@@ -44,6 +55,8 @@ gulp.task('dev',
 );
 
 lazyRequireTask('lint', './tasks/lint', {
-  cacheFilePath: process.cwd() + '/tmp/lintCache.json',
-  src: 'frontend/**/*.js'
+  cacheFilePath: process.cwd() + './tmp/lintCache.json',
+  src: '.app/scripts/**/*.js'
 });
+
+gulp.task('default', gulp.series('dev'));
